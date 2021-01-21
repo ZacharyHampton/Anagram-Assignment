@@ -32,22 +32,25 @@ print(a, b, c, d, f, h)
 def anagramcheck(a, b):
 	c = {}
 
-	for x in a:
-		if x in c:
-			c[x] += 1
-		else:
-			c[x] = 1
+	if len(a) != len(b):  # If length is different, it isn't an anagram.
+		return False
 
-	for x in b:
-		if x in c:
-			c[x] += 1
-		else:
-			c[x] = 1
+	for x in a:  # For each character in word a
+		if x in c:  # If letter exists in dict
+			c[x] += 1  # Increment by 1
+		else:  # If value isn't in dict, add to dict with value 1
+			c[x] = 1  
 
-	for x in c:
-		if c[x] % 2 == 0:
-			pass
-		else:
+	for x in b:  # For each character in word b
+		if x in c:  # If letter exists in dict
+			c[x] -= 1  # Decrement by 1
+		else:  # If value isn't in dict, add to dict with value 1
+			c[x] = 1 
+
+	for x in c:  # For each key in the dict
+		if c[x] == 0:  # If key equals 0
+			pass  # continue through loop
+		else:  # If key is not 0, aka one word didn't have same count of chars
 			return False
 	
 	return True
@@ -58,5 +61,6 @@ c = anagramcheck('here', 'there')
 d = anagramcheck('abcd', 'efgh')
 f = anagramcheck("elegant man", "a gentleman")
 h = anagramcheck("abc", "bcf")
+g = anagramcheck("lll", "laa")
 
-print(a, b, c, d, f, h)
+print(a, b, c, d, f, h, g)
